@@ -28,20 +28,23 @@ for (let i = 0; i < galleryItems.length; i += 1) {
   imgDiv.style.height = "100%";
 }
 
-const selectImage = (img) => {
-  img.preventDefault();
-  if (img.target.nodeName !== "IMG") {
+const selectImage = (event) => {
+  event.preventDefault();
+  if (event.target.nodeName !== "IMG") {
     return;
   }
-  const selectedImg = img.target.dataset.source;
-  const instance = basicLightbox.create(`
-    <img src="${selectedImg}">
-`);
+  const selectedImg = event.target.dataset.source;
+  const instance = basicLightbox.create(
+    `
+    <img src="${selectedImg}">`
+  );
   instance.show();
 
   const close = (event) => {
     if (event.code === "Escape") {
       instance.close();
+      console.log("happened");
+      document.removeEventListener("keydown", close);
     }
   };
   document.addEventListener("keydown", close);
