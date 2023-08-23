@@ -43,7 +43,6 @@ const selectImage = (event) => {
   const close = (event) => {
     if (event.code === "Escape") {
       instance.close();
-      console.log("happened");
       document.removeEventListener("keydown", close);
     }
   };
